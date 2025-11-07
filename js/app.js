@@ -5,11 +5,22 @@ function adicionar() {
 
     //produt.options[produt.selectedIndex].text (put the text into variable)
     //produt.options[produt.selectedIndex].text (put the value into variable)
-    product = document.getElementById('produto');
-    let nameProduct = product.options[product.selectedIndex].text;
+    let option = document.getElementById('produto');
+    let nameProduct = option.options[option.selectedIndex].text;
+    let indexName = nameProduct.indexOf('-');
+    let = option.trim().substring(indexName);
+
+    //take value of product
+    let indexValue = nameProduct.indexOf('R$');
+    price = nameProduct.trim().substring(indexValue);
+
+    if (indexName !== -1) {
+
+        alert(price);
+    }
 
     //valueAsNumber put the value the type number in the variable let.
     quant = document.getElementById('quantidade');
-    const quantProdut = quant.valueAsNumber;
+    const quantProduct = quant.valueAsNumber;
     
 }
