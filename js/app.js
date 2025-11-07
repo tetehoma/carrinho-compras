@@ -8,7 +8,8 @@ function adicionar() {
     let option = document.getElementById('produto');
     let nameProduct = option.options[option.selectedIndex].text;
     let indexName = nameProduct.indexOf('-');
-    let = option.trim().substring(indexName);
+    product = nameProduct.trim().substring('', indexName);
+   
 
     //take value of product
     let indexValue = nameProduct.indexOf('R$');
@@ -19,7 +20,7 @@ function adicionar() {
         alert(price);
     }
 
-    //valueAsNumber put the value the type number in the variable let.
+    //valueAsNumber put the value the input type number in the variable let.
     quant = document.getElementById('quantidade');
     const quantProduct = quant.valueAsNumber;
     
