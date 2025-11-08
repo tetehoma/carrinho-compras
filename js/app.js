@@ -1,27 +1,28 @@
 function adicionar() {
-    let quant;
-    let product;
-    let price;
 
-    //produt.options[produt.selectedIndex].text (put the text into variable)
-    //produt.options[produt.selectedIndex].text (put the value into variable)
-    let option = document.getElementById('produto');
-    let nameProduct = option.options[option.selectedIndex].text;
+    let nameProduct = document.getElementById('produto').value;
     let indexName = nameProduct.indexOf('-');
-    product = nameProduct.trim().substring('', indexName);
-   
+    let nameProductClean = nameProduct.trim().substring('', indexName);
 
     //take value of product
     let indexValue = nameProduct.indexOf('R$');
-    price = nameProduct.trim().substring(indexValue);
+    //select the part of string and cut the specific value text by index.
+    price = nameProduct.trim().substring(indexValue + 2);
+  
+    let quantidade = document.getElementById('quantidade').value;
 
-    if (indexName !== -1) {
-
-        alert(price);
+    if (quantidade != 0) {
+        let lista = document.getElementById('lista-produtos').querySelector('.carrinho__produtos__produto');
+        let newProduct = ` <section class="carrinho__produtos__produto"><span class="texto-azul">${quantidade}x</span> ${nameProductClean} <span class="texto-azul">R$${price}</span></section>`;
+        lista.insertAdjacentHTML('beforebegin', newProduct);
+    } else {
+        alert('Informe a quantidade do produto!');
+       document.getElementById('quantidade').focus();
     }
 
-    //valueAsNumber put the value the input type number in the variable let.
-    quant = document.getElementById('quantidade');
-    const quantProduct = quant.valueAsNumber;
+    let subTotal = price*quantidade;
+    alert(subTotal);
+
+    
     
 }
