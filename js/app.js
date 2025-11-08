@@ -11,22 +11,22 @@
     let quantity = document.getElementById('quantidade').value;
     let price = unitValue*quantity;
 
-    if (quantity != 0) {
-        let carrinho = document.getElementById('lista-produtos');
-        carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
-          <span class="texto-azul">${parseInt(quantity, 10)}x</span> ${nameProduct} <span class="texto-azul">R$${unitValue}</span>
-        </section>`;
-        
-    } else {
-        alert('Informe a quantidade do produto!');
-        document.getElementById('quantidade').focus();
+    if (quantity <= 0 || isNaN(quantity)) {
+       alert('Informe a quantidade do produto!');
+       document.getElementById('quantidade').focus();
+        } else if (!product || product.trim() === '') {
+        alert('Selecione um produto válido');
+            } else {
+                let carrinho = document.getElementById('lista-produtos');
+                carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+                <span class="texto-azul">${parseInt(quantity, 10)}x</span> ${nameProduct} <span class="texto-azul">R$${unitValue}</span>
+                </section>`;
+                totalGeral = totalGeral + price;
+                let campoTotal = document.getElementById('valor-total');
+                campoTotal.textContent = `R$${totalGeral}`;
+                document.getElementById('quantidade').value = '0';
+                }
     }
-    //calculate final price
-    totalGeral = totalGeral + price;
-    let campoTotal = document.getElementById('valor-total');
-    campoTotal.textContent = `R$${totalGeral}`;
-    document.getElementById('quantidade').value = '0';
-}
 
 function limpar() {
     document.getElementById('lista-produtos').innerHTML = '';
