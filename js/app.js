@@ -19,10 +19,19 @@ function adicionar() {
         alert('Informe a quantidade do produto!');
        document.getElementById('quantidade').focus();
     }
-
+    //calculate final price
     let subTotal = price*quantidade;
-    alert(subTotal);
 
-    
+    let valorTotal = document.getElementById('valor-total').textContent;
+    let indexPrice = valorTotal.indexOf('R$');
+    //select the part of string and cut the specific value text by index.
+    let valorTotalClean = valorTotal.trim().substring(indexPrice + 2);
+    //convert valorTotalClean to Number with parseInt
+    let atualValue = (parseInt(valorTotalClean) + subTotal);
+    //atualize total value
+    document.getElementById('valor-total').textContent = `R$${atualValue}`;
+}
+
+function limpar() {
     
 }
