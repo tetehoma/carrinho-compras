@@ -1,37 +1,35 @@
-function adicionar() {
 
-    let nameProduct = document.getElementById('produto').value;
-    let indexName = nameProduct.indexOf('-');
-    let nameProductClean = nameProduct.trim().substring('', indexName);
+    let totalGeral;
+    limpar();
 
+    function adicionar() {
+    //take product name using split
+    let product = document.getElementById('produto').value;
+    let nameProduct = product.split('-')[0];
     //take value of product
-    let indexValue = nameProduct.indexOf('R$');
-    //select the part of string and cut the specific value text by index.
-    price = nameProduct.trim().substring(indexValue + 2);
-  
-    let quantidade = document.getElementById('quantidade').value;
+    let unitValue = product.split('R$')[1];
+    let quantity = document.getElementById('quantidade').value;
+    let price = unitValue*quantity;
 
-    if (quantidade != 0) {
-        let lista = document.getElementById('lista-produtos').querySelector('.carrinho__produtos__produto');
-        let newProduct = ` <section class="carrinho__produtos__produto"><span class="texto-azul">${quantidade}x</span> ${nameProductClean} <span class="texto-azul">R$${price}</span></section>`;
-        lista.insertAdjacentHTML('beforebegin', newProduct);
+    if (quantity != 0) {
+        let carrinho = document.getElementById('lista-produtos');
+        carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+          <span class="texto-azul">${parseInt(quantity, 10)}x</span> ${nameProduct} <span class="texto-azul">R$${unitValue}</span>
+        </section>`;
+        
     } else {
         alert('Informe a quantidade do produto!');
-       document.getElementById('quantidade').focus();
+        document.getElementById('quantidade').focus();
     }
     //calculate final price
-    let subTotal = price*quantidade;
-
-    let valorTotal = document.getElementById('valor-total').textContent;
-    let indexPrice = valorTotal.indexOf('R$');
-    //select the part of string and cut the specific value text by index.
-    let valorTotalClean = valorTotal.trim().substring(indexPrice + 2);
-    //convert valorTotalClean to Number with parseInt
-    let atualValue = (parseInt(valorTotalClean) + subTotal);
-    //atualize total value
-    document.getElementById('valor-total').textContent = `R$${atualValue}`;
+    totalGeral = totalGeral + price;
+    let campoTotal = document.getElementById('valor-total');
+    campoTotal.textContent = `R$${totalGeral}`;
+    document.getElementById('quantidade').value = '0';
 }
 
 function limpar() {
-    
+    document.getElementById('lista-produtos').innerHTML = '';
+    document.getElementById('valor-total').textContent = 'R$0';
+    totalGeral = 0;
 }
